@@ -5,7 +5,7 @@ import "./Header.css";
 const Header = () => {
   return (
     <div className="header">
-      <img className="w-25" src={logo} alt="" />
+      <img className="w-25 mt-5" src={logo} alt="" />
       <nav class="navbar navbar-expand-lg navbar-light bg-secondary mt-5">
         <div class="container-fluid">
           <button
