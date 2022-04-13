@@ -63,14 +63,12 @@ const Shop = () => {
           <form class="d-flex">
             <input 
             onChange={handleSearch}
-              class="form-control search"
+              class="form-control w-25"
               type="search"
               placeholder="Search product"
               aria-label="Search"
             ></input>
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
+           
           </form>
         </div>
       </nav>
