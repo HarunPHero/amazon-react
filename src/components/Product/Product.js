@@ -9,23 +9,23 @@ const Product = (props) => {
   const element = <FontAwesomeIcon icon={faShoppingCart} />;
   return (
     <div>
-      <div class="card products shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="row g-0">
-          <div class="col-md-4">
+      <div className="card products shadow-lg p-3 mb-5 bg-body rounded">
+        <div className="row g-0">
+          <div className="col-md-4">
             <img
               src={props.img}
-              class="img-fluid rounded-start"
+              className="img-fluid rounded-start"
               alt="..."
             ></img>
           </div>
-          <div class="col-md-8 product">
-            <div class="card-body">
+          <div className="col-md-8 product">
+            <div className="card-body">
               <a className="url" href={props.url}>
                 {" "}
-                <h5 class="card-title">{props.name}</h5>
+                <h5 className="card-title">{props.name.slice(0,40)}</h5>
               </a>
-              <p class="card-text">By {props.seller}</p>
-              <p class="card-text">Price: ${props.price}</p>
+              <p className="card-text">By {props.seller}</p>
+              <p className="card-text">Price: ${props.price}</p>
               <p>Only {props.stock} left-order soon</p>
                <Rating
                 initialRating={star}

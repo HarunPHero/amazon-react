@@ -26,24 +26,27 @@ const Cart = (props) => {
   /////////////////////////////////////////////////
   return (
     <div>
-      <div class="card w-100">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item text-center">Order summery</li>
-          <li class="list-group-item text-center">
+      <div className="card w-100">
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item text-center">Order summery</li>
+          <li className="list-group-item text-center">
             Ordered items: {totalquntity}
           </li>
-          <li class="list-group-item">
+          <li className="list-group-item">
             {" "}
-            <span class="cart-item">Total:</span> ${ParseTotal}
+            <span className="cart-item">Total:</span> ${ParseTotal}
           </li>
-          <li class="list-group-item">
-            <span class="cart-item">Shipping:</span> ${ParseShipping}
+          <li className="list-group-item">
+            <span className="cart-item">Shipping:</span> ${ParseShipping}
           </li>
-          <li class="list-group-item">
-            <span class="cart-item">Tax:</span> ${ParseTax}
+          <li className="list-group-item">
+            <span className="cart-item">Tax:</span> ${ParseTax}
           </li>
-          <li class=" gtotal card-footer text-danger text-center">
-            grandTotal: ${GTotal}
+          <li className="gtotal list-group-item">
+          <span className="cart-item">Grandtotal:</span> ${GTotal}
+          </li>
+          <li className="card-footer">
+            {props.children}
           </li>
         </ul>
       </div>

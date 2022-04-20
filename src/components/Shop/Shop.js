@@ -15,10 +15,9 @@ const Shop = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-      setProducts(data)
-      setPd(data)
-      }
-      );
+        setProducts(data);
+        setPd(data);
+      });
   }, []);
   ///////////////////////////////////////////////////////////////
   const handleAddtoCart = (pd) => {
@@ -49,33 +48,35 @@ const Shop = () => {
   }, [products]);
   ////////////////////////////////////////////////////////////////////////////
   //handle search
-  const handleSearch = event => {
+  const handleSearch = (event) => {
     const searchText = event.target.value;
-    const matchedProduct = products.filter(product => product.name.toLowerCase().includes(searchText.toLowerCase()))
-    console.log(matchedProduct.length)
-    setPd(matchedProduct)
-  }
-  
+    const matchedProduct = products.filter((product) =>
+      product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    console.log(matchedProduct.length);
+    setPd(matchedProduct);
+  };
+
   return (
     <>
-      <nav class="navbar navbar-light bg-dark">
-        <div class="container-fluid">
-          <form class="d-flex">
-            <input 
-            onChange={handleSearch}
-              class="form-control w-100"
+      <nav className="navbar navbar-light bg-dark">
+        <div className="container-fluid">
+          <form className="d-flex">
+            <input
+              onChange={handleSearch}
+              className="form-control w-100"
               type="search"
               placeholder="Search product"
               aria-label="Search"
             ></input>
-           
           </form>
         </div>
       </nav>
       <div className="shopContainer">
-        <div className="productContainer">
+        <div className="productContainer row row-cols-1 row-cols-md-2 m-2 ">
           {pd.map((product) => (
             <Product
+              key={product.key}
               img={product.img}
               name={product.name}
               seller={product.seller}
@@ -88,7 +89,9 @@ const Shop = () => {
           ))}
         </div>
         <div className="cart-container fixed-bottom">
-          <Cart cart={cart}></Cart>
+          <Cart cart={cart}>
+            <a href="/order" className="btn btn-warning">Review your order</a>
+          </Cart>
         </div>
       </div>
     </>

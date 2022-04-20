@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import logo from "../../images/logo.png";
 import "./Header.css";
 
@@ -6,10 +7,10 @@ const Header = () => {
   return (
     <div className="header">
       <img className="w-25 mt-5" src={logo} alt="" />
-      <nav class="navbar navbar-expand-lg navbar-light bg-secondary mt-5">
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light bg-secondary mt-5">
+        <div className="container-fluid">
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNavAltMarkup"
@@ -17,23 +18,24 @@ const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a
-                class="nav-link active"
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+              <NavLink
+              activeStyle={{color:"white"}}
+                className="nav-link active"
                 aria-current="page"
-                href="/Shop"
+                to="/Shop"
               >
                 Shop
-              </a>
-              <a class="nav-link" href="/order">
+              </NavLink>
+              <NavLink activeStyle={{color:"white"}} className="nav-link" to="/order">
                 Order review
-              </a>
-              <a class="nav-link" href="/manage">
+              </NavLink>
+              <NavLink activeStyle={{color:"white"}} className="nav-link" to="/manage">
                 Manage inventory here
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>
