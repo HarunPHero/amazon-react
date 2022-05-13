@@ -3,13 +3,20 @@ import { Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header/Header";
+import Login from "./components/Login/Login";
 import Manage from "./components/Manage/Manage";
+import Place from "./components/Place/Place";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Register from "./components/Register/Register";
 import Review from "./components/Review/Review";
 import Shop from "./components/Shop/Shop";
+import Shipping from "./components/Shipping/Shipping"
+import AuthProvider from "./Context/AuthProvider";
 
 function App() {
   return (
     <div className="App">
+      <AuthProvider>
       <BrowserRouter>
         <Header></Header>
         <Switch>
@@ -25,6 +32,19 @@ function App() {
           <Route path="/manage">
             <Manage></Manage>
           </Route>
+          <PrivateRoute path="/place">
+            <Place></Place>
+          </PrivateRoute>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route path="/register">
+            <Register></Register>
+          </Route>
+          <Route path="/shipping">
+            <Shipping></Shipping>
+          </Route>
+         
           <Route>
             <div className="text-center">
               <img
@@ -44,6 +64,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }
