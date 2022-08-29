@@ -1,51 +1,45 @@
 import React, { useEffect, useState } from "react";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
-import { addToDb, getStoredCart } from "../../utilities/fakedb";
+import { addToDb} from "../../utilities/fakedb";
 import "./Shop.css";
+import { Link } from "react-router-dom";
+import useCart from "../../useProducts/useCart";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useCart();
   const [pd, setPd] = useState([]);
+  const [pageCount, setpageCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(12);
 
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/ProgrammingHero1/ema-john-simple-resources/master/fakeData/products.JSON"
-    )
+    fetch("http://localhost:5000/productCount")
+      .then((res) => res.json())
+      .then((data) => {
+        const count = data.countProduct;
+        const pages = Math.ceil(count / 12);
+        setpageCount(pages);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
         setPd(data);
       });
-  }, []);
+  }, [page, size]);
   ///////////////////////////////////////////////////////////////
   const handleAddtoCart = (pd) => {
     const newCart = [...cart, pd];
     setCart(newCart);
     ///save to local storage
-    addToDb(pd.key);
+    addToDb(pd._id);
   };
 
-  useEffect(() => {
-    const saveCart = getStoredCart();
-
-    const storedCart = [];
-    if (products.length) {
-      for (const key in saveCart) {
-        const addedProduct = products.find((product) => product.key === key);
-
-        if (addedProduct) {
-          const quantity = saveCart[key];
-          addedProduct.quantity = quantity;
-          // console.log(storedCart)
-
-          storedCart.push(addedProduct);
-        }
-      }
-      setCart(storedCart);
-    }
-  }, [products]);
   ////////////////////////////////////////////////////////////////////////////
   //handle search
   const handleSearch = (event) => {
@@ -76,7 +70,7 @@ const Shop = () => {
         <div className="productContainer row row-cols-1 row-cols-md-2 m-2 ">
           {pd.map((product) => (
             <Product
-              key={product.key}
+              key={product._id}
               img={product.img}
               name={product.name}
               seller={product.seller}
@@ -88,11 +82,46 @@ const Shop = () => {
             ></Product>
           ))}
         </div>
+
         <div className="cart-container fixed-bottom">
           <Cart cart={cart}>
-            <a href="/order" className="btn btn-warning">Review your order</a>
+            {/* <a href="/order" className="btn btn-warning">
+              Review your order
+            </a> */}
+            <Link to="/order">
+              <button className="btn btn-warning">Review your order</button>
+            </Link>
           </Cart>
         </div>
+      </div>
+      <div>
+        <ul className="pagination pagination-md m-2">
+          {[...Array(pageCount).keys()].map((number) => (
+            <>
+              <nav aria-label="...">
+                <li className="page-item" key={number}>
+                  <button
+                    className={
+                      page === number ? "btn btn-dark" : "btn btn-warning"
+                    }
+                    onClick={() => setPage(number)}
+                  >
+                    {number}
+                  </button>
+                </li>
+              </nav>
+            </>
+          ))}
+          
+          <select onChange={(e) => setSize(e.target.value)}>
+            <option value="6">6</option>
+            <option value="12" selected>
+              12
+            </option>
+            <option value="18">18</option>
+            <option value="24">24</option>
+          </select>
+        </ul>
       </div>
     </>
   );

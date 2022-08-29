@@ -4,7 +4,6 @@ import "./Cart.css";
 const Cart = (props) => {
   const { cart } = props;
   
-
   let totalquntity = 0;
 
   let total = 0;

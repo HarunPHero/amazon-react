@@ -1,7 +1,7 @@
 import React from "react";
 
 const ReviewItem = (props) => {
-  const { name, img, quantity, price, key } = props.product;
+  const { name, img, quantity, price, _id } = props.product;
   const { handleRemove } = props;
 
   return (
@@ -18,7 +18,7 @@ const ReviewItem = (props) => {
               <h5>Quantity: {quantity}</h5>
 
               <button
-                onClick={() => handleRemove(key)}
+                onClick={() => handleRemove(_id)}
                 className="btn btn-warning"
               >
                 Remove
