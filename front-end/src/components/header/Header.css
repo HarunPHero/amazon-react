@@ -1,0 +1,9 @@
+.header{
+    text-align: center;
+}
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  background-color: rgb(255, 225, 57);
+}
